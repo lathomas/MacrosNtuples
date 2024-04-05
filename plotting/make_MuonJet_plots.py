@@ -1,7 +1,7 @@
 eventselection='#mu+jet'
 subfolder='/plotsL1Run3'
-channelname='MuonJet
-'
+channelname='MuonJet'
+
 import yaml
 import drawplots
 import argparse
