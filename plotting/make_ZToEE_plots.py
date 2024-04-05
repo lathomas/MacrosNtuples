@@ -1,6 +1,7 @@
 # make_ZToEE_plots.py, a program to draw the L1Studies plots obtained from the histograms extracted from NanoAOD
 eventselection='Z#rightarrow ee'
 subfolder='/plotsL1Run3'
+channelname='ZToEE'
 
 import yaml
 import drawplots
@@ -38,7 +39,7 @@ def main():
             xtitle = 'N_{vtx}',
             ytitle = 'Events',
             top_label = toplabel,
-            plotname = 'L1EG_nvtx',
+            plotname = channelname + '_L1EG_nvtx',
             dirname = args.dir + subfolder,
             )
 
@@ -92,7 +93,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(iso), eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1EG_TurnOn{}_{}'.format(iso, r) ,
+                        plotname = channelname + '_L1EG_TurnOn{}_{}'.format(iso, r) ,
                         )
 
                     # same thing, zoom on the 0 - 50 GeV region in pT
@@ -110,7 +111,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(iso), eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1EG_TurnOn{}_{}_Zoom'.format(iso, r) ,
+                        plotname = channelname + '_L1EG_TurnOn{}_{}_Zoom'.format(iso, r) ,
                         )
 
                     # Comparisons between bins of PU:
@@ -130,7 +131,7 @@ def main():
                                 extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(iso), eta_label),
                                 setlogx = True,
                                 top_label = toplabel,
-                                plotname = 'L1EG{}_TurnOn{}_{}_vsPU'.format(thr, iso, r) ,
+                                plotname = channelname + '_L1EG{}_TurnOn{}_{}_vsPU'.format(thr, iso, r) ,
                                 )
 
             if config['TurnOns']:
@@ -152,7 +153,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", All qual.}}{{p_{{T}}^{{L1 EG}} #geq {} GeV, {}}}".format(thr, eta_label[1:-1]),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1EG{}_TurnOn_{}_IsoComparison'.format(thr, r) ,
+                        plotname = channelname + '_L1EG{}_TurnOn_{}_IsoComparison'.format(thr, r) ,
                         )
 
                     drawplots.makeeff(
@@ -169,7 +170,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", All qual.}}{{p_{{T}}^{{L1 EG}} #geq {} GeV, {}}}".format(thr, eta_label[1:-1]),
                         #setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1EG{}_TurnOn_{}_IsoComparison_Zoom'.format(thr, r) ,
+                        plotname = channelname + '_L1EG{}_TurnOn_{}_IsoComparison_Zoom'.format(thr, r) ,
                         )
 
         if config['Efficiency']:
@@ -187,7 +188,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+'}{L1 EG NonIso}',
                 top_label = toplabel,
-                plotname = 'L1EG_EffVsEtaPhi',
+                plotname = channelname + '_L1EG_EffVsEtaPhi',
                 axisranges = [-2.5, 2.5, -3.1416, 3.1416, 0, 1.1],
                 )
 
@@ -205,7 +206,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEta',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -223,7 +224,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEta',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -241,7 +242,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -259,7 +260,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -286,7 +287,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsRunnb',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsRunnb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -304,7 +305,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsRunnb',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsRunnb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -322,7 +323,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunnb',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunnb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -340,7 +341,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsRunnb',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsRunnb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -365,7 +366,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEtaPhi',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -384,7 +385,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -403,7 +404,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -422,7 +423,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -442,7 +443,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEtaPt',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -462,7 +463,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEtaPt',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -482,7 +483,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -502,7 +503,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -522,7 +523,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(e_{1}, e_{2})|<1.479}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin1_barrelbarrel',
+                plotname = channelname + '_mll_unpref_L1FinalORBXmin1_barrelbarrel',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -539,7 +540,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(e_{1}, e_{2})|<1.479}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin2_barrelbarrel',
+                plotname = channelname + '_mll_unpref_L1FinalORBXmin2_barrelbarrel',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -556,7 +557,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(e_{1}, e_{2})|>1.479}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin1_endcapendcap',
+                plotname = channelname + '_mll_unpref_L1FinalORBXmin1_endcapendcap',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -573,7 +574,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(e_{1}, e_{2})|>1.479}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin2_endcapendcap',
+                plotname = channelname + '_mll_unpref_L1FinalORBXmin2_endcapendcap',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -591,7 +592,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEta_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEta_Fwd',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -609,7 +610,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEta_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEta_Fwd',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -627,7 +628,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta_Fwd',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -645,7 +646,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEta_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEta_Fwd',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -665,7 +666,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEtaPhi_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEtaPhi_Fwd',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -684,7 +685,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEtaPhi_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEtaPhi_Fwd',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -703,7 +704,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi_Fwd',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -722,7 +723,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi_Fwd',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -742,7 +743,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PostfiringVsEtaPt_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsEtaPt_Fwd',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -762,7 +763,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_AllEvents_PrefiringVsEtaPt_Fwd',
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsEtaPt_Fwd',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -782,7 +783,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt_Fwd',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -802,7 +803,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromEGamma_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt_Fwd',
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt_Fwd',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -828,7 +829,7 @@ def main():
                 extralabel = '#splitline{'+eventselection+'}{Non Iso.}',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1EG_ResponseVsPt',
+                plotname = channelname + '_L1EG_ResponseVsPt',
                 axisranges = [0, 100, 0.8, 1.2], 
                 )
 
@@ -844,7 +845,7 @@ def main():
                 extralabel = '#splitline{'+eventselection+'}{Non Iso.}',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1EG_ResponseVsRunNb',
+                plotname = channelname + '_L1EG_ResponseVsRunNb',
                 axisranges = [355374, 362760, 0.8, 1.2],
                 )
 

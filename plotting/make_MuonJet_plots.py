@@ -1,5 +1,7 @@
 eventselection='#mu+jet'
 subfolder='/plotsL1Run3'
+channelname='MuonJet
+'
 import yaml
 import drawplots
 import argparse
@@ -37,7 +39,7 @@ def main():
             xtitle = 'N_{vtx}',
             ytitle = 'Events',
             top_label = toplabel,
-            plotname = 'L1Jet_FromSingleMuon_nvtx',
+            plotname = channelname+'_L1Jet_FromSingleMuon_nvtx',
             dirname = args.dir + subfolder,
             )
 
@@ -66,7 +68,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 30 GeV}{p_{T}^{L1 jet} #geq "+"{}".format(thr)+" GeV}", 
                     setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Jet{}_FromSingleMuon_TurnOn_EtaComparison'.format(thr).replace(".", "p") ,
+                    plotname = channelname+'_L1Jet{}_FromSingleMuon_TurnOn_EtaComparison'.format(thr).replace(".", "p") ,
                     )
 
                 drawplots.makeeff(
@@ -83,7 +85,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 30 GeV}{p_{T}^{L1 jet} #geq "+"{}".format(thr)+" GeV}", 
                     #setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Jet{}_FromSingleMuon_TurnOn_EtaComparison_Zoom'.format(thr).replace(".", "p") ,
+                    plotname = channelname+'_L1Jet{}_FromSingleMuon_TurnOn_EtaComparison_Zoom'.format(thr).replace(".", "p") ,
                     )
 
         for r in config['Regions']:
@@ -127,7 +129,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 30 GeV}"+"{}".format(eta_label),
                     setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Jet_FromSingleMuon_TurnOn_{}'.format(r) ,
+                    plotname = channelname+'_L1Jet_FromSingleMuon_TurnOn_{}'.format(r) ,
                     )
 
                 # same thing, zoom on the 0 - 50 GeV region in pT
@@ -145,7 +147,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 30 GeV}"+"{}".format(eta_label),
                     #setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Jet_FromSingleMuon_TurnOn_{}_Zoom'.format(r) ,
+                    plotname = channelname+'_L1Jet_FromSingleMuon_TurnOn_{}_Zoom'.format(r) ,
                     )
 
                 # Comparisons between bins of PU:
@@ -165,7 +167,7 @@ def main():
                             extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 30 GeV}"+"{}".format(eta_label),
                             setlogx = True,
                             top_label = toplabel,
-                            plotname = 'L1Jet{}_FromSingleMuon_TurnOn_{}_vsPU'.format(thr, r),
+                            plotname = channelname+'_L1Jet{}_FromSingleMuon_TurnOn_{}_vsPU'.format(thr, r),
                             )
 
         if config['Efficiency']:
@@ -183,7 +185,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+'}{p_{T}^{jet} > 100 GeV}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_EffVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromSingleMuon_EffVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0.8, 1.1],
                 )
 
@@ -202,7 +204,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PostfiringVsEta',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PostfiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -220,7 +222,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -238,7 +240,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -256,7 +258,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -276,7 +278,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PostfiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PostfiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -295,7 +297,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -314,7 +316,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -333,7 +335,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -353,7 +355,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PostfiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PostfiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -373,7 +375,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_AllEvents_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromSingleMuon_AllEvents_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -393,7 +395,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -413,7 +415,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 30 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -441,7 +443,7 @@ def main():
                 legend_pos = 'top',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_ResponseVsPt',
+                plotname = channelname+'_L1Jet_FromSingleMuon_ResponseVsPt',
                 axisranges = [0, 200, 0.6, 1.5], 
                 )
 
@@ -458,7 +460,7 @@ def main():
                 legend_pos = 'top',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1Jet_FromSingleMuon_ResponseVsRunNb',
+                plotname = channelname+'_L1Jet_FromSingleMuon_ResponseVsRunNb',
                 axisranges = [355374, 362760, 0.7, 1.5],
                 )
 
@@ -475,7 +477,7 @@ def main():
 #                legend_pos = 'top',
 #                legendlabels = eta_labels,
 #                top_label = toplabel,
-#                plotname = 'L1Jet_FromSingleMuon_ResponseVsRunNb_Zoom',
+#                plotname = channelname+'_L1Jet_FromSingleMuon_ResponseVsRunNb_Zoom',
 #                axisranges = [355374, 362760, 0.8, 1.1],
 #                )
 

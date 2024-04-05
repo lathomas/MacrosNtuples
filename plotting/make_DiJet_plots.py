@@ -1,5 +1,7 @@
 eventselection='dijet'
 subfolder='/plotsL1Run3'
+channelname='DiJet'
+
 import yaml
 import drawplots
 import argparse
@@ -35,7 +37,7 @@ def main():
         xtitle = 'N_{vtx}',
         ytitle = 'Events',
         top_label = toplabel,
-        plotname = 'L1Jet_FromDijet_nvtx',
+        plotname = channelname+'_L1Jet_FromDijet_nvtx',
         dirname = args.dir + subfolder,
     )
 
@@ -56,7 +58,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PostfiringVsEta',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PostfiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -74,7 +76,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -92,7 +94,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -110,7 +112,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -130,7 +132,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PostfiringVsRunNb',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PostfiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -148,7 +150,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PrefiringVsRunNb',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -166,7 +168,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunNb',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -184,7 +186,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsRunNb',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -205,7 +207,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PostfiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PostfiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -224,7 +226,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -243,7 +245,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -262,7 +264,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -282,7 +284,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PostfiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PostfiringVsEtaPt',
                 axisranges = [-5, 5, 500, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -302,7 +304,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_AllEvents_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromDiJet_AllEvents_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 500, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -322,7 +324,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 500, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -342,7 +344,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Jet_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 500, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -364,7 +366,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PostfiringVsEta',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PostfiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -382,7 +384,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PrefiringVsEta',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -400,7 +402,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -418,7 +420,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -438,7 +440,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PostfiringVsEtaPhi',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PostfiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -457,7 +459,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -476,7 +478,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -495,7 +497,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -515,7 +517,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PostfiringVsEtaPt',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PostfiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -535,7 +537,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_AllEvents_PrefiringVsEtaPt',
+                plotname = channelname+'_L1EG_FromDiJet_AllEvents_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -555,7 +557,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -575,7 +577,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
+                plotname = channelname+'_L1EG_FromDiJet_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -597,7 +599,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 50 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1IsoTau10_FromDiJet_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1IsoTau10_FromDiJet_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -616,7 +618,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|<1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mjj_unpref_L1FinalORBXmin1_barrelbarrel',
+                plotname = channelname+'_mjj_unpref_L1FinalORBXmin1_barrelbarrel',
                 axisranges = [1000, 6000, 0, 0.5],
                 )
 
@@ -633,7 +635,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|<1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mjj_unpref_L1FinalORBXmin2_barrelbarrel',
+                plotname = channelname+'_mjj_unpref_L1FinalORBXmin2_barrelbarrel',
                 axisranges = [1000, 6000, 0, 0.5],
                 )
 
@@ -650,7 +652,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|>1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mjj_unpref_L1FinalORBXmin1_endcapendcap',
+                plotname = channelname+'_mjj_unpref_L1FinalORBXmin1_endcapendcap',
                 axisranges = [1000, 6000, 0, 0.5],
                 )
 
@@ -667,7 +669,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|>1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mjj_unpref_L1FinalORBXmin2_endcapendcap',
+                plotname = channelname+'_mjj_unpref_L1FinalORBXmin2_endcapendcap',
                 axisranges = [1000, 6000, 0, 0.5],
                 )
 

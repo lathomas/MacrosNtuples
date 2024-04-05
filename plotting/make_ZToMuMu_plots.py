@@ -1,6 +1,7 @@
 # make_mu_plots.py, a program to draw the L1Studies plots obtained from the histograms extracted from NanoAOD
 eventselection='Z#rightarrow #mu#mu'
 subfolder='/plotsL1Run3'
+channelname='ZToMuMu'
 
 import yaml
 import drawplots
@@ -38,7 +39,7 @@ def main():
             xtitle = 'N_{vtx}',
             ytitle = 'Events',
             top_label = toplabel,
-            plotname = 'L1Mu_nvtx',
+            plotname = channelname+'_L1Mu_nvtx',
             dirname = args.dir + subfolder,
             )
 
@@ -87,7 +88,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(qual), eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1Mu_TurnOn{}_{}'.format(qual, r) ,
+                        plotname = channelname+'_L1Mu_TurnOn{}_{}'.format(qual, r) ,
                         )
 
                     # same thing, zoom on the 0 - 50 GeV region in pT
@@ -105,7 +106,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(qual), eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1Mu_TurnOn{}_{}_Zoom'.format(qual, r) ,
+                        plotname = channelname+'_L1Mu_TurnOn{}_{}_Zoom'.format(qual, r) ,
                         )
 
                     # Comparisons between bins of PU:
@@ -125,7 +126,7 @@ def main():
                                 extralabel = "#splitline{"+eventselection+", {}}}{}".format(label(qual), eta_label),
                                 setlogx = True,
                                 top_label = toplabel,
-                                plotname = 'L1Mu{}_TurnOn{}_{}_vsPU'.format(thr, qual, r) ,
+                                plotname = channelname+'_L1Mu{}_TurnOn{}_{}_vsPU'.format(thr, qual, r) ,
                                 )
 
         if config['Efficiency']:
@@ -142,7 +143,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{"+eventselection+"}{L1 Qual. #geq 12}',
                 top_label = toplabel,
-                plotname = 'L1Mu22_EffVsEtaPhi',
+                plotname = channelname+'_L1Mu22_EffVsEtaPhi',
                 axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
                 )
 
@@ -161,7 +162,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PostfiringVsEta',
+                plotname = channelname+'_L1Mu_AllEvents_PostfiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -179,7 +180,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PrefiringVsEta',
+                plotname = channelname+'_L1Mu_AllEvents_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -197,7 +198,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_FirstBxInTrain_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -215,7 +216,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_TriggerRules_PrefiringVsEta',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -235,7 +236,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PostfiringVsRunNb',
+                plotname = channelname+'_L1Mu_AllEvents_PostfiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -253,7 +254,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PrefiringVsRunNb',
+                plotname = channelname+'_L1Mu_AllEvents_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -271,7 +272,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunNb',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -289,7 +290,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsRunNb',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_TriggerRules_PrefiringVsRunNb',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -310,7 +311,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PostfiringVsEtaPhi',
+                plotname = channelname+'_L1Mu_AllEvents_PostfiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -329,7 +330,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Mu_AllEvents_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -348,7 +349,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -367,7 +368,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_TriggerRules_PrefiringVsEtaPhi',
                 axisranges = [-5, 5, -3.1416, 3.1416, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -387,7 +388,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PostfiringVsEtaPt',
+                plotname = channelname+'_L1Mu_AllEvents_PostfiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -407,7 +408,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_AllEvents_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Mu_AllEvents_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -427,7 +428,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_FirstBxInTrain_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -447,7 +448,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'L1Mu_FromSingleMuon_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
+                plotname = channelname+'_L1Mu_UnprefireableEvent_TriggerRules_PrefiringVsEtaPt',
                 axisranges = [-5, 5, 50, 4000, 0, 0.1],
                 addnumtoden = False,
                 setlogy = True,
@@ -467,7 +468,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(#mu_{1}, #mu_{2})|<1.24}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin1_barrelbarrel',
+                plotname = channelname+'_mll_unpref_L1FinalORBXmin1_barrelbarrel',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -484,7 +485,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(#mu_{1}, #mu_{2})|<1.24}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin2_barrelbarrel',
+                plotname = channelname+'_mll_unpref_L1FinalORBXmin2_barrelbarrel',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -501,7 +502,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(#mu_{1}, #mu_{2})|>1.24}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin1_endcapendcap',
+                plotname = channelname+'_mll_unpref_L1FinalORBXmin1_endcapendcap',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -518,7 +519,7 @@ def main():
                 legendlabels = ['Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(#mu_{1}, #mu_{2})|>1.24}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
-                plotname = 'mll_unpref_L1FinalORBXmin2_endcapendcap',
+                plotname = channelname+'_mll_unpref_L1FinalORBXmin2_endcapendcap',
                 axisranges = [50, 3000, 0, 0.1],
                 )
 
@@ -542,7 +543,7 @@ def main():
                 extralabel = '#splitline{'+eventselection+'}{All qual.}',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1Mu_ResponseVsPt',
+                plotname = channelname+'_L1Mu_ResponseVsPt',
                 axisranges = [0, 100, 0.8, 1.6], 
                 )
 
@@ -558,7 +559,7 @@ def main():
                 extralabel = '#splitline{'+eventselection+'}{All qual.}',
                 legendlabels = eta_labels,
                 top_label = toplabel,
-                plotname = 'L1Mu_ResponseVsRunNb',
+                plotname = channelname+'_L1Mu_ResponseVsRunNb',
                 axisranges = [355374, 362760, 0.9, 1.5],
                 )
 
@@ -585,7 +586,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", All qual.}}{{p_{{T}}^{{L1 #mu}} #geq {} GeV}}".format(thr),
                     setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Mu{}_TurnOnQual12_EtaComparison'.format(thr) ,
+                    plotname = channelname+'_L1Mu{}_TurnOnQual12_EtaComparison'.format(thr) ,
                     )
 
                 drawplots.makeeff(
@@ -602,7 +603,7 @@ def main():
                     extralabel = "#splitline{"+eventselection+", All qual.}}{{p_{{T}}^{{L1 #mu}} #geq {} GeV}}".format(thr),
                     #setlogx = True,
                     top_label = toplabel,
-                    plotname = 'L1Mu{}_TurnOnQual12_EtaComparison_Zoom'.format(thr) ,
+                    plotname = channelname+'_L1Mu{}_TurnOnQual12_EtaComparison_Zoom'.format(thr) ,
                     )
 
 def label(qual):

@@ -1,5 +1,6 @@
 eventselection='#mu+#tau_{h}'
 subfolder='/plotsL1Run3'
+channelname='ZToTauTau'
 import yaml
 import drawplots
 import argparse
@@ -38,7 +39,7 @@ def main():
         xtitle = 'N_{vtx}',
         ytitle = 'Events',
         top_label = toplabel,
-        plotname = 'L1Tau_FromSingleMuon_nvtx',
+        plotname = channelname+'_L1Tau_nvtx',
         dirname = args.dir + subfolder,
     )
     
@@ -88,7 +89,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}".format(label(iso))+"}"+"{}".format(eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1Tau_TurnOn{}_{}'.format(iso, r) ,
+                        plotname = channelname+'_L1Tau_TurnOn{}_{}'.format(iso, r) ,
                     )
                     #Zoom
                     drawplots.makeeff(
@@ -105,7 +106,7 @@ def main():
                         extralabel = "#splitline{"+eventselection+", {}".format(label(iso))+"}"+"{}".format(eta_label),
                         setlogx = True,
                         top_label = toplabel,
-                        plotname = 'L1Tau_TurnOn{}_{}_Zoom'.format(iso, r) ,
+                        plotname = channelname+'_L1Tau_TurnOn{}_{}_Zoom'.format(iso, r) ,
                     )
                     
                     # Comparisons between bins of PU:
@@ -125,7 +126,7 @@ def main():
                                 extralabel = "#splitline{"+eventselection+", {}".format(label(iso))+"}"+"{}".format(eta_label),
                                 setlogx = True,
                                 top_label = toplabel,
-                                plotname = 'L1Tau{}_TurnOn{}_{}_vsPU'.format(thr, iso, r) ,
+                                plotname = channelname+'_L1Tau{}_TurnOn{}_{}_vsPU'.format(thr, iso, r) ,
                             )
                             
                 if config['TurnOns']:
@@ -146,7 +147,7 @@ def main():
                             extralabel = "#splitline{"+eventselection+"}"+"{p_{T}^{L1 Tau} #geq "+"{}".format(thr)+" GeV, "+"{}".format(eta_label[1:-1])+"}",
                             setlogx = True,
                             top_label = toplabel,
-                            plotname = 'L1Tau{}_TurnOn_{}_IsoComparison'.format(thr, r) ,
+                            plotname = channelname+'_L1Tau{}_TurnOn_{}_IsoComparison'.format(thr, r) ,
                         )
                         
                         drawplots.makeeff(
@@ -162,7 +163,7 @@ def main():
                             axisranges = [20, 50],
                             extralabel = "#splitline{"+eventselection+"}"+"{p_{T}^{L1 Tau} #geq "+"{}".format(thr)+" GeV, "+"{}".format(eta_label[1:-1])+"}",
                             top_label = toplabel,
-                            plotname = 'L1Tau{}_TurnOn_{}_IsoComparison_Zoom'.format(thr, r) ,
+                            plotname = channelname+'_L1Tau{}_TurnOn_{}_IsoComparison_Zoom'.format(thr, r) ,
                         )
                     
         if config['Efficiency']:
@@ -180,7 +181,7 @@ def main():
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+'}{L1 Tau NonIso}',
                 top_label = toplabel,
-                plotname = 'L1Tau_EffVsEtaPhi',
+                plotname = channelname+'_L1Tau_EffVsEtaPhi',
                 axisranges = [-2.5, 2.5, -3.1416, 3.1416, 0, 1.1],
             )
             
@@ -203,7 +204,7 @@ def main():
                extralabel = '#splitline{'+eventselection+'}{Non Iso.}',
                legendlabels = eta_labels,
                top_label = toplabel,
-               plotname = 'L1Tau_ResponseVsPt',
+               plotname = channelname+'_L1Tau_ResponseVsPt',
                axisranges = [20, 70, 0.8, 1.2],
            )
 
@@ -219,7 +220,7 @@ def main():
                extralabel = '#splitline{'+eventselection+'}{Non Iso.}',
                legendlabels = eta_labels,
                top_label = toplabel,
-               plotname = 'L1Tau_ResponseVsRunNb',
+               plotname = channelname+'_L1Tau_ResponseVsRunNb',
                axisranges = [355374, 362760, 0.8, 1.2],
            )
            
