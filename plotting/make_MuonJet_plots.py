@@ -508,13 +508,13 @@ def main():
 
             drawplots.makeeff(
                 axisranges = [0., 2000.],
-                plotname = channelname+'L1ETSum_HLTMET120_TurnOn',
+                plotname = channelname+'_L1ETSum_HLTMET120_TurnOn',
                 **HLTMET120_kwargs, **MET_kwargs,
                 )
 
             drawplots.makeeff(
                 axisranges = [0., 400.],
-                plotname = channelname+'L1ETSum_HLTMET120_TurnOn_Zoom',
+                plotname = channelname+'_L1ETSum_HLTMET120_TurnOn_Zoom',
                 **HLTMET120_kwargs, **MET_kwargs,
                 )
 
@@ -529,13 +529,13 @@ def main():
 
             drawplots.makeeff(
                 axisranges = [0., 2000.],
-                plotname = channelname+'L1ETSum_HLT1050_TurnOn',
+                plotname = channelname+'_L1ETSum_HLT1050_TurnOn',
                 **HLT1050_kwargs, **MET_kwargs,
                 )
 
             drawplots.makeeff(
                 axisranges = [0., 400.],
-                plotname = channelname+'L1ETSum_HLT1050_TurnOn_Zoom',
+                plotname = channelname+'_L1ETSum_HLT1050_TurnOn_Zoom',
                 **HLT1050_kwargs, **MET_kwargs,
                 )
 
@@ -550,13 +550,13 @@ def main():
 
             drawplots.makeeff(
                 axisranges = [0., 2000.],
-                plotname = channelname+'L1ETSum_ETMHF_TurnOn',
+                plotname = channelname+'_L1ETSum_ETMHF_TurnOn',
                 **ETMHF_kwargs, **MET_kwargs,
                 )
 
             drawplots.makeeff(
                 axisranges = [0., 400.],
-                plotname = channelname+'L1ETSum_ETMHF_TurnOn_Zoom',
+                plotname = channelname+'_L1ETSum_ETMHF_TurnOn_Zoom',
                 **ETMHF_kwargs, **MET_kwargs,
                 )
 
@@ -571,13 +571,13 @@ def main():
 
             drawplots.makeeff(
                 axisranges = [0., 3000.],
-                plotname = channelname+'L1ETSum_HTT_TurnOn',
+                plotname = channelname+'_L1ETSum_HTT_TurnOn',
                 **HTT_kwargs, **MET_kwargs,
                 )
 
             drawplots.makeeff(
                 axisranges = [0., 1000.],
-                plotname = channelname+'L1ETSum_HTT_TurnOn_Zoom',
+                plotname = channelname+'_L1ETSum_HTT_TurnOn_Zoom',
                 **HTT_kwargs, **MET_kwargs,
                 )
 
@@ -601,13 +601,13 @@ def main():
 
                 drawplots.makeeff(
                     axisranges = [0, 2000],
-                    plotname = channelname+'L1ETSum_HLTMET120_TurnOn_vsPU',
+                    plotname = channelname+'_L1ETSum_HLTMET120_TurnOn_vsPU',
                     **HLTMET120_kwargs, **MET_PU_kwargs,
                     )
 
                 drawplots.makeeff(
                     axisranges = [0, 400],
-                    plotname = channelname+'L1ETSum_HLTMET120_TurnOn_vsPU_Zoom',
+                    plotname = channelname+'_L1ETSum_HLTMET120_TurnOn_vsPU_Zoom',
                     **HLTMET120_kwargs, **MET_PU_kwargs,
                     )
 
@@ -622,13 +622,13 @@ def main():
 
                 drawplots.makeeff(
                     axisranges = [0, 2000],
-                    plotname = channelname+'L1ETSum_HLT1050_TurnOn_vsPU',
+                    plotname = channelname+'_L1ETSum_HLT1050_TurnOn_vsPU',
                     **HLT1050_kwargs, **MET_PU_kwargs,
                     )
 
                 drawplots.makeeff(
                     axisranges = [0, 400],
-                    plotname = channelname+'L1ETSum_HLT1050_TurnOn_vsPU_Zoom',
+                    plotname = channelname+'_L1ETSum_HLT1050_TurnOn_vsPU_Zoom',
                     **HLT1050_kwargs, **MET_PU_kwargs,
                     )
 
@@ -641,13 +641,13 @@ def main():
 
                 drawplots.makeeff(
                     axisranges = [0, 2000],
-                    plotname = channelname+'L1ETSum_ETMHF90_TurnOn_vsPU',
+                    plotname = channelname+'_L1ETSum_ETMHF90_TurnOn_vsPU',
                     **ETMHF90_kwargs, **MET_PU_kwargs,
                     )
 
                 drawplots.makeeff(
                     axisranges = [0, 400],
-                    plotname = channelname+'L1ETSum_ETMHF90_TurnOn_vsPU_Zoom',
+                    plotname = channelname+'_L1ETSum_ETMHF90_TurnOn_vsPU_Zoom',
                     **ETMHF90_kwargs, **MET_PU_kwargs,
                     )
 
@@ -660,13 +660,13 @@ def main():
 
                 drawplots.makeeff(
                     axisranges = [0, 3000],
-                    plotname = channelname+'L1ETSum_HTT280_TurnOn_vsPU',
+                    plotname = channelname+'_L1ETSum_HTT280_TurnOn_vsPU',
                     **HTT280_kwargs, **MET_PU_kwargs,
                     )
 
                 drawplots.makeeff(
                     axisranges = [0, 1000],
-                    plotname = channelname+'L1ETSum_HTT280_TurnOn_vsPU_Zoom',
+                    plotname = channelname+'_L1ETSum_HTT280_TurnOn_vsPU_Zoom',
                     **HTT280_kwargs, **MET_PU_kwargs,
                     )
 
