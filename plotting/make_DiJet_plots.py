@@ -37,7 +37,7 @@ def main():
         xtitle = 'N_{vtx}',
         ytitle = 'Events',
         top_label = toplabel,
-        plotname = channelname+'_L1Jet_FromDijet_nvtx',
+        plotname = channelname+'_L1Jet_nvtx',
         dirname = args.dir + subfolder,
     )
 
