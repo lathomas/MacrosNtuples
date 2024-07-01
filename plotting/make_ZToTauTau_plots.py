@@ -14,7 +14,8 @@ def main():
     parser.add_argument("-d", "--dir", dest="dir", help="The directory to read the inputs files from and draw the plots to", type=str, default='./')
     parser.add_argument("-c", "--config", dest="config", help="The YAML config to read from", type=str, default='../config_cards/full_ZToTauTau.yaml')
     parser.add_argument("-l", "--lumi", dest="lumi", help="The integrated luminosity to display in the top right corner of the plot", type=str, default='')
-    
+    parser.add_argument("--nosqrts", dest="nosqrts", help="Don't show sqrt(s)", action='store_true')
+
     args = parser.parse_args()
     config = yaml.safe_load(open(args.config, 'r'))
     
@@ -23,6 +24,8 @@ def main():
         toplabel="#sqrt{s} = 13.6 TeV, L_{int} = " + args.lumi #+ " fb^{-1}"
     else:
         toplabel="#sqrt{s} = 13.6 TeV"
+    if args.nosqrts:
+        toplabel=args.lumi
         
     suffixes = ['']
     if config['PU_plots']['make_histos']:

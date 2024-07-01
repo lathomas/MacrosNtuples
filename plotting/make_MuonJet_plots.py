@@ -15,6 +15,7 @@ def main():
     parser.add_argument("-d", "--dir", dest="dir", help="The directory to read the inputs files from and draw the plots to", type=str, default='./')
     parser.add_argument("-c", "--config", dest="config", help="The YAML config to read from", type=str, default='../config_cards/full_MuonJet.yaml')
     parser.add_argument("-l", "--lumi", dest="lumi", help="The integrated luminosity to display in the top right corner of the plot", type=str, default='')
+    parser.add_argument("--nosqrts", dest="nosqrts", help="Don't show sqrt(s)", action='store_true')
 
     args = parser.parse_args()
     config = yaml.safe_load(open(args.config, 'r'))
@@ -24,6 +25,8 @@ def main():
         toplabel="#sqrt{s} = 13.6 TeV, L_{int} = " + args.lumi #+ " fb^{-1}"
     else:
         toplabel="#sqrt{s} = 13.6 TeV"
+    if args.nosqrts:
+        toplabel=args.lumi
 
     suffixes = ['']
     if config['PU_plots']['make_histos']:
@@ -108,7 +111,7 @@ def main():
                     legendlabels = [],
                     extralabel = "#splitline{"+eventselection+", p_{T}^{jet} > 100 GeV}"+"{}".format(eta_label),
                     top_label = toplabel,
-                    plotname = "L1Jet_EffVsRunNb_{}".format(r),
+                    plotname = channelname+"L1Jet_EffVsRunNb_{}".format(r),
                     )
 
             if config['TurnOns']:
@@ -500,9 +503,9 @@ def main():
             ###
 
             HLTMET120_kwargs = {
-                'num': ['h_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight'],
-                'den': ['h_MetNoMu_Denominator'],
-                'legendlabels': ['PFMHTNoMu120'],
+                'num': ['h_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight', 'h_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_DiJet80_40_Mjj500_central', 'h_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_DiJet80_40_Mjj500_HF', 'h_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_DiJet140_70_Mjj900'],
+                'den': ['h_MetNoMu_Denominator', 'h_MetNoMu_Denominator_DiJet80_40_Mjj500_central', 'h_MetNoMu_Denominator_DiJet80_40_Mjj500_HF', 'h_MetNoMu_Denominator_DiJet140_70_Mjj900'],
+                'legendlabels': ['Inclusive', '2 jets, p_{T}>80/40 GeV, |#eta|<2.5, M(jj)>500', '2 jets, p_{T}>80/40 GeV, |#eta|>3, M(jj)>500', '2 jets, p_{T}>140/70 GeV, M(jj)>900'],
                 'xtitle': 'PFMET(#mu subtracted) (GeV)',
                 }
 
@@ -529,13 +532,13 @@ def main():
 
             drawplots.makeeff(
                 axisranges = [0., 2000.],
-                plotname = channelname+'_L1ETSum_HLT1050_TurnOn',
+                plotname = channelname+'_L1ETSum_HLTHT1050_TurnOn',
                 **HLT1050_kwargs, **MET_kwargs,
                 )
 
             drawplots.makeeff(
                 axisranges = [0., 400.],
-                plotname = channelname+'_L1ETSum_HLT1050_TurnOn_Zoom',
+                plotname = channelname+'_L1ETSum_HLTHT1050_TurnOn_Zoom',
                 **HLT1050_kwargs, **MET_kwargs,
                 )
 

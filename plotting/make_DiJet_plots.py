@@ -15,6 +15,7 @@ def main():
     parser.add_argument("-d", "--dir", dest="dir", help="The directory to read the inputs files from and draw the plots to", type=str, default='./')
     parser.add_argument("-c", "--config", dest="config", help="The YAML config to read from", type=str, default='../config_cards/full_DiJet.yaml')
     parser.add_argument("-l", "--lumi", dest="lumi", help="The integrated luminosity to display in the top right corner of the plot", type=str, default='')
+    parser.add_argument("--nosqrts", dest="nosqrts", help="Don't show sqrt(s)", action='store_true')
 
     args = parser.parse_args()
     config = yaml.safe_load(open(args.config, 'r'))
@@ -24,7 +25,9 @@ def main():
         toplabel="#sqrt{s} = 13.6 TeV, L_{int} = " + args.lumi #+ " fb^{-1}"
     else:
         toplabel="#sqrt{s} = 13.6 TeV"
-    toplabel=args.lumi
+    if args.nosqrts:
+        toplabel=args.lumi
+
     suffixes = ['']
     if config['PU_plots']['make_histos']:
         bins = config['PU_plots']['nvtx_bins']
@@ -113,6 +116,78 @@ def main():
                 extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
                 plotname = channelname+'_L1Jet_UnprefireableEvent_TriggerRules_PrefiringVsEta',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Postfiring vs Pt 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Jet30_AllEvents_bxplus1_pt_jet500'],
+                den = ['L1Jet30_AllEvents_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1Jet30 (BX+1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Jet_AllEvents_PostfiringVsPt',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (All events) 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Jet30_AllEvents_bxmin1_pt_jet500'],
+                den = ['L1Jet30_AllEvents_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1Jet30 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Jet_AllEvents_PrefiringVsPt',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_FirstBxInTrain)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Jet30_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_pt_jet500'],
+                den = ['L1Jet30_L1_UnprefireableEvent_FirstBxInTrain_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1Jet30 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Jet_UnprefireableEvent_FirstBxInTrain_PrefiringVsPt',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_TriggerRules)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Jet30_L1_UnprefireableEvent_TriggerRules_bxmin1_pt_jet500'],
+                den = ['L1Jet30_L1_UnprefireableEvent_TriggerRules_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1Jet30 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Jet_UnprefireableEvent_TriggerRules_PrefiringVsPt',
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
@@ -425,6 +500,150 @@ def main():
                 addnumtoden = False,
                 )
 
+            # Postfiring vs Pt 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxplus1_pt_jet500'],
+                den = ['L1EG20_AllEvents_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1EG20 (BX+1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_AllEvents_PostfiringVsPt',
+                axisranges = [500, 5000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (All events) 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxmin1_pt_jet500'],
+                den = ['L1EG20_AllEvents_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_AllEvents_PrefiringVsPt',
+                axisranges = [500, 5000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_FirstBxInTrain)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_pt_jet500'],
+                den = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsPt',
+                axisranges = [500, 5000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_TriggerRules)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_TriggerRules_bxmin1_pt_jet500'],
+                den = ['L1EG20_L1_UnprefireableEvent_TriggerRules_Denominator_pt_jet500'],
+                xtitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsPt',
+                axisranges = [500, 5000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Postfiring vs Runnb 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxplus1_runnb_jet500'],
+                den = ['L1EG20_AllEvents_Denominator_runnb_jet500'],
+                xtitle = 'Run number',
+                ytitle = 'L1EG20 (BX+1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_AllEvents_PostfiringVsRunNb',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Runnb (All events) 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxmin1_runnb_jet500'],
+                den = ['L1EG20_AllEvents_Denominator_runnb_jet500'],
+                xtitle = 'Run number',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_AllEvents_PrefiringVsRunNb',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Runnb (UnprefireableEvent_FirstBxInTrain)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_runnb_jet500'],
+                den = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_Denominator_runnb_jet500'],
+                xtitle = 'Run number',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (1st bx in train)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsRunNb',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Runnb (UnprefireableEvent_TriggerRules)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_TriggerRules_bxmin1_runnb_jet500'],
+                den = ['L1EG20_L1_UnprefireableEvent_TriggerRules_Denominator_runnb_jet500'],
+                xtitle = 'Run number',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{jet} > 500 GeV}{Unpref. events (trig. rules)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsRunNb',
+                axisranges = [-5, 5, 0, 0.1],
+                addnumtoden = False,
+                )
+
 
             # Postfiring vs Eta Phi
             drawplots.makeeff(
@@ -611,11 +830,11 @@ def main():
                 saveplot = True,
                 dirname = args.dir + subfolder,
                 nvtx_suffix = s,
-                num = ['mjj_unpref_trigrules_L1FinalORBXmin1_barrelbarrel', 'mjj_unpref_1stbx_L1FinalORBXmin1_barrelbarrel'],
-                den = ['mjj_unpref_trigrules_barrelbarrel', 'mjj_unpref_1stbx_barrelbarrel'],
+                num = ['mjj_unpref_1stbx_L1FinalORBXmin1_barrelbarrel', 'mjj_unpref_trigrules_L1FinalORBXmin1_barrelbarrel'],
+                den = ['mjj_unpref_1stbx_barrelbarrel', 'mjj_unpref_trigrules_barrelbarrel'],
                 xtitle = 'M(j_{1}j_{2}) (GeV)',
                 ytitle = 'Fraction of events passing L1FinalOR in BX-1',
-                legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
+                legendlabels = ['Unpref events (1st bx)', 'Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|<1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
                 plotname = channelname+'_mjj_unpref_L1FinalORBXmin1_barrelbarrel',
@@ -645,11 +864,11 @@ def main():
                 saveplot = True,
                 dirname = args.dir + subfolder,
                 nvtx_suffix = s,
-                num = ['mjj_unpref_trigrules_L1FinalORBXmin1_endcapendcap', 'mjj_unpref_1stbx_L1FinalORBXmin1_endcapendcap'],
-                den = ['mjj_unpref_trigrules_endcapendcap', 'mjj_unpref_1stbx_endcapendcap'],
+                num = ['mjj_unpref_1stbx_L1FinalORBXmin1_endcapendcap', 'mjj_unpref_trigrules_L1FinalORBXmin1_endcapendcap'],
+                den = ['mjj_unpref_1stbx_endcapendcap', 'mjj_unpref_trigrules_endcapendcap'],
                 xtitle = 'M(j_{1}j_{2}) (GeV)',
                 ytitle = 'Fraction of events passing L1FinalOR in BX-1',
-                legendlabels = ['Unpref events (trig. rules)', 'Unpref events (1st bx)'],
+                legendlabels = ['Unpref events (1st bx)', 'Unpref events (trig. rules)'],
                 extralabel = '#splitline{'+eventselection+', |#eta(j_{1}, j_{2})|>1.3}{Unpref. events (trig. rules)}',
                 top_label = toplabel,
                 plotname = channelname+'_mjj_unpref_L1FinalORBXmin1_endcapendcap',

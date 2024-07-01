@@ -16,15 +16,18 @@ def main():
     parser.add_argument("-d", "--dir", dest="dir", help="The directory to read the inputs files from and draw the plots to", type=str, default='./')
     parser.add_argument("-c", "--config", dest="config", help="The YAML config to read from", type=str, default='../config_cards/full_ZToEE.yaml')
     parser.add_argument("-l", "--lumi", dest="lumi", help="The integrated luminosity to display in the top right corner of the plot", type=str, default='')
+    parser.add_argument("--nosqrts", dest="nosqrts", help="Don't show sqrt(s)", action='store_true')
 
     args = parser.parse_args()
     config = yaml.safe_load(open(args.config, 'r'))
-
+    
     input_file = args.dir + "/all_ZToEE.root"
     if args.lumi != '':
         toplabel="#sqrt{s} = 13.6 TeV, L_{int} = " + args.lumi #+ " fb^{-1}"
     else:
         toplabel="#sqrt{s} = 13.6 TeV"
+    if args.nosqrts:
+        toplabel=args.lumi
 
     suffixes = ['']
     if config['PU_plots']['make_histos']:
@@ -55,8 +58,43 @@ def main():
             #print(eta_range)
             #print(eta_label)
 
-            if config['Efficiency']:
 
+
+            if config['Efficiency']:
+                
+                drawplots.makeeff(
+                    inputFiles_list = [input_file],
+                    saveplot = True,
+                    dirname = args.dir + subfolder,
+                    nvtx_suffix = s,
+                    den = ['h_den_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    num = ['h_num_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    xtitle = 'p_{T}^{e}(reco) (GeV)',
+                    ytitle = 'HLT_Ele32_WPTight_Gsf Efficiency',
+                    axisranges = [10, 1000],
+                    extralabel = "#splitline{"+eventselection+", }}{}".format(eta_label),
+                    setlogx = True,
+                    top_label = toplabel,
+                    plotname = channelname+'_HLT_Ele32_WPTight_Gsf_TurnOn_{}'.format( r) ,
+                )
+                
+                # same thing, zoom on the 0 - 50 GeV region in pT
+                drawplots.makeeff(
+                    inputFiles_list = [input_file],
+                    saveplot = True,
+                    dirname = args.dir + subfolder,
+                    nvtx_suffix = s,
+                    den = ['h_den_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    num = ['h_num_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    xtitle = 'p_{T}^{e}(reco) (GeV)',
+                    ytitle = 'HLT_Ele32_WPTight_Gsf Efficiency',
+                    axisranges = [10, 50],
+                    extralabel = "#splitline{"+eventselection+", }}{}".format(eta_label),
+                    setlogx = False,
+                    top_label = toplabel,
+                    plotname = channelname+'_HLT_Ele32_WPTight_Gsf_TurnOn_{}_Zoom'.format( r) ,
+                )
+                
                 # Efficiency vs Run Number
                 drawplots.makeeff(
                     inputFiles_list = [input_file],
@@ -64,7 +102,7 @@ def main():
                     dirname = args.dir + subfolder,
                     nvtx_suffix = s,
                     den = ['h_PlateauEffVsRunNb_Denominator_EGNonIso_plots_{}'.format(eta_range)],
-                    num = ['h_PlateauEffVsRunNb_Numerator_{}_plots_{}'.format(iso, eta_range) for iso in config['Isos']],
+                    num = ['h_PlateauEffVsRunNb_Numerator_EGNonIso_plots_{}'.format(eta_range)],
                     xtitle = 'run number',
                     ytitle = 'L1EG30 Efficiency',
                     axisranges = [0, 1, 0.8, 1.05],
@@ -73,6 +111,25 @@ def main():
                     top_label = toplabel,
                     plotname = "L1EG_EffVsRunNb_{}".format(r),
                     )
+
+                # Efficiency vs Run Number
+                drawplots.makeeff(
+                    inputFiles_list = [input_file],
+                    saveplot = True,
+                    dirname = args.dir + subfolder,
+                    nvtx_suffix = s,
+                    den = ['h_PlateauEffVsRunNb_Denominator_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    num = ['h_PlateauEffVsRunNb_Numerator_HLT_Ele32_WPTight_Gsf_plots_{}'.format(eta_range)],
+                    xtitle = 'run number',
+                    ytitle = 'HLT_Ele32_WPTight_Gsf Efficiency',
+                    axisranges = [0, 1, 0.8, 1.05],
+                    #legendlabels = [label(iso) for iso in config['Isos']],
+                    extralabel = "#splitline{"+eventselection+", p_{{T}}^{{e}}(reco) #geq 35 GeV}}{}".format(eta_label),
+                    top_label = toplabel,
+                    plotname = "HLT_Ele32_WPTight_Gsf_EffVsRunNb_{}".format(r),
+                    )
+                
+                
 
             for iso in config['Isos']:
                 if config['TurnOns']:
@@ -192,6 +249,25 @@ def main():
                 axisranges = [-2.5, 2.5, -3.1416, 3.1416, 0, 1.1],
                 )
 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['h_HLT_Ele32_WPTight_EtaPhi_NumeratorEGNonIso'],
+                den = ['h_HLT_Ele32_WPTight_EtaPhi_DenominatorEGNonIso'],
+                xtitle = '#eta^{e}(reco)',
+                ytitle = '#phi^{e}(reco)',
+                ztitle = 'HLT_Ele32_WPTight_Gsf efficiency (p_{T}^{e}(reco) > 35 GeV)',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+'}{}',
+                top_label = toplabel,
+                plotname = channelname + '_HLT_Ele32_WPTight_Gsf_EffVsEtaPhi',
+                axisranges = [-2.5, 2.5, -3.1416, 3.1416, 0, 1.1],
+                )
+            
+
+
         if config['Prefiring']:
             # Postfiring vs Eta 
             drawplots.makeeff(
@@ -266,6 +342,79 @@ def main():
                 )
 
 
+
+
+            # Postfiring vs Pt 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxplus1_pt'],
+                den = ['L1EG20_AllEvents_Denominator_pt'],
+                xtitle = 'p_{T}^{e}(reco)',
+                ytitle = 'L1EG20 (BX+1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname + '_L1EG_AllEvents_PostfiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (All events) 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_AllEvents_bxmin1_pt'],
+                den = ['L1EG20_AllEvents_Denominator_pt'],
+                xtitle = 'p_{T}^{e}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname + '_L1EG_AllEvents_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_FirstBxInTrain)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_pt'],
+                den = ['L1EG20_L1_UnprefireableEvent_FirstBxInTrain_Denominator_pt'],
+                xtitle = 'p_{T}^{e}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (1st bx in train)}',
+                top_label = toplabel,
+                plotname = channelname + '_L1EG_UnprefireableEvent_FirstBxInTrain_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_TriggerRules)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1EG20_L1_UnprefireableEvent_TriggerRules_bxmin1_pt'],
+                den = ['L1EG20_L1_UnprefireableEvent_TriggerRules_Denominator_pt'],
+                xtitle = 'p_{T}^{e}(reco)',
+                ytitle = 'L1EG20 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}(e)>25 GeV}{Unpref. events (trig. rules)}',
+                top_label = toplabel,
+                plotname = channelname + '_L1EG_UnprefireableEvent_TriggerRules_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
 
 
 
@@ -345,9 +494,6 @@ def main():
                 axisranges = [-5, 5, 0, 0.1],
                 addnumtoden = False,
                 )
-
-
-
 
 
 
@@ -848,6 +994,38 @@ def main():
                 plotname = channelname + '_L1EG_ResponseVsRunNb',
                 axisranges = [355374, 362760, 0.8, 1.2],
                 )
+        
+        drawplots.makeeff(
+            inputFiles_list = [input_file],
+            saveplot = True,
+            dirname = args.dir + subfolder,
+            nvtx_suffix = s,
+            den = ['hltisophotoneb_den'],
+            num = ['hltisophoton50eb_num'],
+            xtitle = 'p_{T}^{e}(reco) (GeV)',
+            ytitle = 'HLT_Photon50EB_TightID_TightIso Efficiency',
+            axisranges = [10, 1000],
+            extralabel = eventselection,
+            setlogx = True,
+            top_label = toplabel,
+            plotname = channelname+'HLT_Photon50EB_TightID_TightIso' ,
+        )
+        drawplots.makeeff(
+            inputFiles_list = [input_file],
+            saveplot = True,
+            dirname = args.dir + subfolder,
+            nvtx_suffix = s,
+            den = ['hltisophotoneb_den'],
+            num = ['hltisophoton45eb_num'],
+            xtitle = 'p_{T}^{e}(reco) (GeV)',
+            ytitle = 'HLT_Photon45EB_TightID_TightIso Efficiency',
+            axisranges = [10, 1000],
+            extralabel = eventselection,
+            setlogx = True,
+            top_label = toplabel,
+            plotname = channelname+'HLT_Photon45EB_TightID_TightIso' ,
+        )
+
 
 
 def label(iso):

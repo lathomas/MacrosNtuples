@@ -16,7 +16,8 @@ def main():
     parser.add_argument("-d", "--dir", dest="dir", help="The directory to read the inputs files from and draw the plots to", type=str, default='./')
     parser.add_argument("-c", "--config", dest="config", help="The YAML config to read from", type=str, default='../config_cards/full_ZToMuMu.yaml')
     parser.add_argument("-l", "--lumi", dest="lumi", help="The integrated luminosity to display in the top right corner of the plot", type=str, default='')
-
+    parser.add_argument("--nosqrts", dest="nosqrts", help="Don't show sqrt(s)", action='store_true')
+    
     args = parser.parse_args()
     config = yaml.safe_load(open(args.config, 'r'))
 
@@ -25,6 +26,8 @@ def main():
         toplabel="#sqrt{s} = 13.6 TeV, L_{int} = " + args.lumi #+ " fb^{-1}"
     else:
         toplabel="#sqrt{s} = 13.6 TeV"
+    if args.nosqrts:
+        toplabel=args.lumi
 
     suffixes = ['']
     if config['PU_plots']['make_histos']:
@@ -49,7 +52,42 @@ def main():
             region = config['Regions'][r]
             eta_range = "eta{}to{}".format(region[0], region[1]).replace(".","p")
             eta_label = '{{{} #leq | #eta^{{#mu}}(reco)| < {}}}'.format(region[0], region[1])
+            
 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                den = ['h_den_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                num = ['h_num_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                xtitle = 'p_{T}^{#mu}(reco) (GeV)',
+                ytitle = 'HLT_IsoMu24 Efficiency',
+                axisranges = [10, 1000],
+                extralabel = "#splitline{"+eventselection+", }}{}".format(eta_label),
+                setlogx = True,
+                top_label = toplabel,
+                plotname = channelname+'_HLT_IsoMu24_TurnOn_{}'.format( r) ,
+            )
+            
+            # same thing, zoom on the 0 - 50 GeV region in pT
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                den = ['h_den_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                num = ['h_num_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                xtitle = 'p_{T}^{#mu}(reco) (GeV)',
+                ytitle = 'HLT_IsoMu24 Efficiency',
+                axisranges = [10, 50],
+                extralabel = "#splitline{"+eventselection+", }}{}".format(eta_label),
+                setlogx = False,
+                top_label = toplabel,
+                plotname = channelname+'_HLT_IsoMu24_TurnOn_{}_Zoom'.format( r) ,
+            )
+            
+            
             if config['Efficiency']:
 
                 # Efficiency vs Run Number
@@ -68,6 +106,24 @@ def main():
                     top_label = toplabel,
                     plotname = "L1Mu_EffVsRunNb_{}".format(r),
                     )
+
+                # HLT IsoMu24 Efficiency vs Run Number
+                drawplots.makeeff(
+                    inputFiles_list = [input_file],
+                    saveplot = True,
+                    dirname = args.dir + subfolder,
+                    nvtx_suffix = s,
+                    den = ['h_PlateauEffVsRunNb_Denominator_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                    num = ['h_PlateauEffVsRunNb_Numerator_HLT_IsoMu24_plots_{}'.format(eta_range)],
+                    xtitle = 'run number',
+                    ytitle = 'HLT_IsoMu24 Efficiency',
+                    axisranges = [0, 1, 0.8, 1.05],
+                    #legendlabels = [label(qual) for qual in config['Qualities']],
+                    extralabel = "#splitline{"+eventselection+", p_{{T}}^{{#mu}}(reco) #geq 30 GeV}}{}".format(eta_label),
+                    top_label = toplabel,
+                    plotname = "HLT_IsoMu24_EffVsRunNb_{}".format(r),
+                    )
+
 
             for qual in config['Qualities']:
                 if config['TurnOns']:
@@ -141,11 +197,81 @@ def main():
                 ytitle = '#phi^{#mu}(reco)',
                 ztitle = 'L1Mu22 efficiency (p_{T}^{#mu}(reco) > 27 GeV)',
                 legendlabels = [''],
-                extralabel = '#splitline{"+eventselection+"}{L1 Qual. #geq 12}',
+                extralabel = '#splitline{'+eventselection+'}{L1 Qual. #geq 12}',
                 top_label = toplabel,
                 plotname = channelname+'_L1Mu22_EffVsEtaPhi',
                 axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
                 )
+
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['h_Mu22_EtaPhi_NumeratorQual13'],
+                den = ['h_Mu22_EtaPhi_DenominatorQual13'],
+                xtitle = '#eta^{#mu}(reco)',
+                ytitle = '#phi^{#mu}(reco)',
+                ztitle = 'L1Mu22 efficiency (p_{T}^{#mu}(reco) > 27 GeV)',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+'}{L1 Qual. #geq 13}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu22Qual13_EffVsEtaPhi',
+                axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
+                )
+  
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['h_Mu22_EtaPhi_NumeratorQual14'],
+                den = ['h_Mu22_EtaPhi_DenominatorQual14'],
+                xtitle = '#eta^{#mu}(reco)',
+                ytitle = '#phi^{#mu}(reco)',
+                ztitle = 'L1Mu22 efficiency (p_{T}^{#mu}(reco) > 27 GeV)',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+'}{L1 Qual. #geq 14}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu22Qual14_EffVsEtaPhi',
+                axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
+                )
+ 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['h_Mu22_EtaPhi_NumeratorQual15'],
+                den = ['h_Mu22_EtaPhi_DenominatorQual15'],
+                xtitle = '#eta^{#mu}(reco)',
+                ytitle = '#phi^{#mu}(reco)',
+                ztitle = 'L1Mu22 efficiency (p_{T}^{#mu}(reco) > 27 GeV)',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+'}{L1 Qual. #geq 15}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu22Qual15_EffVsEtaPhi',
+                axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
+                )
+
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['h_HLT_IsoMu24_EtaPhi_Numerator'],
+                den = ['h_HLT_IsoMu24_EtaPhi_Denominator'],
+                xtitle = '#eta^{#mu}(reco)',
+                ytitle = '#phi^{#mu}(reco)',
+                ztitle = 'HLT_IsoMu24 efficiency (p_{T}^{#mu}(reco) > 30 GeV)',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+'}{}',
+                top_label = toplabel,
+                plotname = channelname+'_HLT_IsoMu24_EffVsEtaPhi',
+                axisranges = [-2.4, 2.4, -3.1416, 3.1416, 0, 1.1],
+                )
+           
+
 
         if config['Prefiring']:
 
@@ -221,6 +347,77 @@ def main():
                 addnumtoden = False,
                 )
 
+            # Postfiring vs Pt 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Mu10_AllEvents_bxplus1_pt'],
+                den = ['L1Mu10_AllEvents_Denominator_pt'],
+                xtitle = 'p_{T}^{#mu}(reco)',
+                ytitle = 'L1Mu10 (BX+1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu_AllEvents_PostfiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (All events) 
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Mu10_AllEvents_bxmin1_pt'],
+                den = ['L1Mu10_AllEvents_Denominator_pt'],
+                xtitle = 'p_{T}^{#mu}(reco)',
+                ytitle = 'L1Mu10 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu_AllEvents_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_FirstBxInTrain)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Mu10_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_pt'],
+                den = ['L1Mu10_L1_UnprefireableEvent_FirstBxInTrain_Denominator_pt'],
+                xtitle = 'p_{T}^{#mu}(reco)',
+                ytitle = 'L1Mu10 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu_UnprefireableEvent_FirstBxInTrain_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
+
+            # Prefiring vs Pt (UnprefireableEvent_TriggerRules)
+            drawplots.makeeff(
+                inputFiles_list = [input_file],
+                saveplot = True,
+                dirname = args.dir + subfolder,
+                nvtx_suffix = s,
+                num = ['L1Mu10_L1_UnprefireableEvent_TriggerRules_bxmin1_pt'],
+                den = ['L1Mu10_L1_UnprefireableEvent_TriggerRules_Denominator_pt'],
+                xtitle = 'p_{T}^{#mu}(reco)',
+                ytitle = 'L1Mu10 (BX-1) matching fraction',
+                legendlabels = [''],
+                extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
+                top_label = toplabel,
+                plotname = channelname+'_L1Mu_UnprefireableEvent_TriggerRules_PrefiringVsPt',
+                axisranges = [10, 1000, 0, 0.1],
+                addnumtoden = False,
+                )
 
 
             # Postfiring vs RunNb 
@@ -383,7 +580,7 @@ def main():
                 num = ['L1Mu10_AllEvents_bxplus1_etapt'],
                 den = ['L1Mu10_AllEvents_Denominator_etapt'],
                 xtitle = '#eta^{#mu}(reco)',
-                ytitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'p_{T}^{#mu}(reco)',
                 ztitle = 'L1Mu10 (BX+1) matching fraction',
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
@@ -403,7 +600,7 @@ def main():
                 num = ['L1Mu10_AllEvents_bxmin1_etapt'],
                 den = ['L1Mu10_AllEvents_Denominator_etapt'],
                 xtitle = '#eta^{#mu}(reco)',
-                ytitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'p_{T}^{#mu}(reco)',
                 ztitle = 'L1Mu10 (BX-1) matching fraction',
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{All events}',
@@ -423,7 +620,7 @@ def main():
                 num = ['L1Mu10_L1_UnprefireableEvent_FirstBxInTrain_bxmin1_etapt'],
                 den = ['L1Mu10_L1_UnprefireableEvent_FirstBxInTrain_Denominator_etapt'],
                 xtitle = '#eta^{#mu}(reco)',
-                ytitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'p_{T}^{#mu}(reco)',
                 ztitle = 'L1Mu10 (BX-1) matching fraction',
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (1st bx in train)}',
@@ -443,7 +640,7 @@ def main():
                 num = ['L1Mu10_L1_UnprefireableEvent_TriggerRules_bxmin1_etapt'],
                 den = ['L1Mu10_L1_UnprefireableEvent_TriggerRules_Denominator_etapt'],
                 xtitle = '#eta^{#mu}(reco)',
-                ytitle = 'p_{T}^{jet}(reco)',
+                ytitle = 'p_{T}^{#mu}(reco)',
                 ztitle = 'L1Mu10 (BX-1) matching fraction',
                 legendlabels = [''],
                 extralabel = '#splitline{'+eventselection+', p_{T}^{#mu}(reco) > 20 GeV}{Unpref. events (trig. rules)}',
@@ -606,11 +803,18 @@ def main():
                     plotname = channelname+'_L1Mu{}_TurnOnQual12_EtaComparison_Zoom'.format(thr) ,
                     )
 
+
+
+
+
 def label(qual):
     labels = {
             'AllQual': 'All qual.',
             'Qual8': 'Qual. #geq 8',
             'Qual12': 'Qual. #geq 12',
+            'Qual13': 'Qual. #geq 13',
+            'Qual14': 'Qual. #geq 14',
+            'Qual15': 'Qual. #geq 15',
             }
 
     if qual in labels:

@@ -267,12 +267,14 @@ bool L1SeedDoubleJetMassMin(ROOT::VecOps::RVec<float>pt, ROOT::VecOps::RVec<floa
 
 
 
-vector<float> L1MHTHF(ROOT::VecOps::RVec<float>pt, ROOT::VecOps::RVec<float>eta, ROOT::VecOps::RVec<float>phi,  ROOT::VecOps::RVec<int>bx){
+vector<float> L1MHTHFCustom(ROOT::VecOps::RVec<float>pt, ROOT::VecOps::RVec<float>eta, ROOT::VecOps::RVec<float>phi,  ROOT::VecOps::RVec<int>bx, double ptcut){
   vector<float> result;
   TVector2 mhthf(0.,0.);
+  TVector2 saturated(2047.5,0.);
   for(unsigned int i = 0; i<pt.size(); i++){
-    if(pt[i]<30.)continue;
+    if(pt[i]<ptcut)continue;
     if(bx[i]!=0)continue;
+    if(pt[i]>1000){ mhthf = saturated; break;}
     TVector2 jetpt(0.,0.); 
     jetpt.SetMagPhi(pt[i], phi[i]);
     mhthf+=jetpt;
@@ -612,3 +614,13 @@ ROOT::VecOps::RVec <Bool_t> isLeadJet (ROOT::VecOps::RVec<float> Jet_pt, ROOT::V
   return result;
 }
 
+double GetMax(ROOT::VecOps::RVec<float>Obj_pt){
+  double result = 0.0001;
+  if (Obj_pt.size()==0) return result;
+  else{
+    for(unsigned int i = 0; i<Obj_pt.size(); i++){
+      if(Obj_pt[i]>result) result = Obj_pt[i];
+    }
+  }
+    return result;
+}

@@ -8,11 +8,13 @@ import argparse
 
 #In case you want to load an helper for C++ functions
 ROOT.gInterpreter.Declare('#include "../helpers/Helper.h"')
+ROOT.gInterpreter.Declare('#include "../helpers/Helper_HadW.h"')
 ROOT.gInterpreter.Declare('#include "../helpers/Helper_InvariantMass.h"')
 #Importing stuff from other python files
 sys.path.insert(0, '../helpers')
 
 import helper_nano as h
+import helper_nano_hadw as h_hadw
 
 
 def main():
@@ -38,6 +40,7 @@ def main():
                         ''', 
                         type=str, default='PhotonJet')
     parser.add_argument("--config", dest="config", help="Yaml configuration file to read. Default: full config for that channel.", type=str, default='')
+    parser.add_argument("--reemul", help="Run on reemulated quantities", action='store_true')
     #parser.add_argument("--plot_nvtx", dest="plot_nvtx", help="Whether to save additional plots in bins of nvtx. Boolean, default = False", type=bool, default=False)
     #parser.add_argument("--nvtx_bins", dest="nvtx_bins", help="Edges of the nvtx bins to use if plotNvtx is set to True. Default=[10, 20, 30, 40, 50, 60]", nargs='+', type=int, default=[10, 20, 30, 40, 50, 60])
     args = parser.parse_args() 
@@ -67,10 +70,14 @@ def main():
             config_file = '../config_cards/full_ZToMuMu.yaml'
         elif args.channel == 'ZToEE':
             config_file = '../config_cards/full_ZToEE.yaml'
-        if args.channel == 'DiJet':
+        elif args.channel == 'DiJet':
             config_file = '../config_cards/full_DiJet.yaml'
         elif args.channel == 'ZToTauTau':
             config_file = '../config_cards/full_ZToTauTau.yaml'
+        elif args.channel == 'TTbar1Mu4Jets2BJets':
+            config_file = '../config_cards/full_MuonJet.yaml'
+        elif args.channel == 'TTbar1Mu4Jets2BJets_L1Only':
+            config_file = '../config_cards/full_MuonJet.yaml'
 
     # Read config and set config_dict in helper
     with open(config_file) as s:
@@ -98,14 +105,61 @@ def main():
         df = df.Filter(fltr)
     nEvents = df.Count().GetValue()
 
+    if not 'L1_FinalOR_BXmin1' in df.GetColumnNames():
+        df = df.Define('L1_FinalOR_BXmin1','return false;')
+    if not 'L1_FinalOR_BXmin2' in df.GetColumnNames():
+        df = df.Define('L1_FinalOR_BXmin2','return false;')
+
+
     if not 'L1_UnprefireableEvent_TriggerRules' in df.GetColumnNames():
         df = df.Define('L1_UnprefireableEvent_TriggerRules','L1_UnprefireableEvent')
     if not 'L1_UnprefireableEvent_FirstBxInTrain' in df.GetColumnNames():
         df = df.Define('L1_UnprefireableEvent_FirstBxInTrain','return false;')
     
+    if not 'Jet_btagPNetB' in df.GetColumnNames():
+        df = df.Define('Jet_btagPNetB','Jet_btagDeepFlavB')
+
+    if not 'HLT_Photon45EB_TightID_TightIso' in df.GetColumnNames():
+        df = df.Define('HLT_Photon45EB_TightID_TightIso','return false;')
+
+    if args.reemul:
+        df=df.Redefine('L1Mu_pt','L1EmulMu_pt')
+        df=df.Redefine('L1Mu_eta','L1EmulMu_eta')
+        df=df.Redefine('L1Mu_phi','L1EmulMu_phi')
+        df=df.Redefine('L1Mu_bx','L1EmulMu_bx')
+        df=df.Redefine('L1Mu_hwCharge','L1EmulMu_hwCharge')
+        df=df.Redefine('L1Mu_hwQual','L1EmulMu_hwQual')
+        df=df.Redefine('L1Mu_etaAtVtx','L1EmulMu_etaAtVtx')
+        df=df.Redefine('L1Mu_phiAtVtx','L1EmulMu_phiAtVtx')
+        
+        df=df.Redefine('L1EG_pt','L1EmulEG_pt')
+        df=df.Redefine('L1EG_eta','L1EmulEG_eta')
+        df=df.Redefine('L1EG_phi','L1EmulEG_phi')
+        df=df.Redefine('L1EG_bx','L1EmulEG_bx')
+        df=df.Redefine('L1EG_hwIso','L1EmulEG_hwIso')
+        
+        
+        df=df.Redefine('L1Tau_pt','L1EmulTau_pt')
+        df=df.Redefine('L1Tau_eta','L1EmulTau_eta')
+        df=df.Redefine('L1Tau_phi','L1EmulTau_phi')
+        df=df.Redefine('L1Tau_bx','L1EmulTau_bx')
+        df=df.Redefine('L1Tau_hwIso','L1EmulTau_hwIso')
+        
+        df=df.Redefine('L1Jet_pt','L1EmulJet_pt')
+        df=df.Redefine('L1Jet_eta','L1EmulJet_eta')
+        df=df.Redefine('L1Jet_phi','L1EmulJet_phi')
+        df=df.Redefine('L1Jet_bx','L1EmulJet_bx')
+        df=df.Redefine('L1Jet_hwIso','L1EmulJet_hwIso')
+
+        df=df.Redefine('L1EtSum_pt','L1EmulEtSum_pt')
+        df=df.Redefine('L1EtSum_phi','L1EmulEtSum_phi')
+        df=df.Redefine('L1EtSum_bx','L1EmulEtSum_bx')
+        df=df.Redefine('L1EtSum_etSumType','L1EmulEtSum_etSumType')
+
+
 
     print('There are {} events'.format(nEvents))
-
+    print('File is: ',inputFile )
     
 
     #Max events to run on 
@@ -116,7 +170,14 @@ def main():
 
     #Apply MET filters
     df = df.Filter('Flag_HBHENoiseFilter&&Flag_HBHENoiseIsoFilter&&Flag_goodVertices&&Flag_EcalDeadCellTriggerPrimitiveFilter&&Flag_BadPFMuonFilter&&Flag_BadPFMuonDzFilter')
-
+    if args.channel != 'ZToMuMu':
+        df = df.Filter('run<379315||run >379354') #prefire veto test, hcal phase scan, ecal timing scan
+    df = df.Filter('run<379344||run>379411') #Pixels off, at least for some of these runs
+    #df = df.Filter('run>=380647') #First run with updated HF resp corrs
+    #df = df.Filter('run>=379800&&run<380647') #New offline JECs
+    #df = df.Filter('run>=379800')
+    #    if args.channel == 'ZToMuMu' or args.channel == 'DiJet':
+    #        df = df.Filter('run>379600')
     # binning for run number
     h.set_runnb_bins(df)
 
@@ -127,7 +188,7 @@ def main():
     out = ROOT.TFile(args.outputFile, "recreate")
     ####The sequence of filters/column definition starts here
     
-    if args.channel not in ['PhotonJet','MuonJet','ZToMuMu','ZToEE', 'DiJet', 'ZToTauTau']:
+    if args.channel not in ['PhotonJet','MuonJet','ZToMuMu','ZToEE', 'DiJet', 'ZToTauTau', 'TTbar1Mu4Jets2BJets', 'TTbar1Mu4Jets2BJets_L1Only']:
         print("Channel {} does not exist".format(args.channel))
         return 
 
@@ -269,10 +330,15 @@ def main():
 #        df_report.Print()
 
     if args.channel == 'ZToEE':
+        
         df = h.lepton_iselectron(df)
+        df_photon50 = h.ZEE_EleSelection_forHLTPhoton50(df, 80, 100)
+        df_photon50, histos_photon50 = h.ZEE_Plots_forHLTPhoton50(df_photon50) 
+
         df_fwd = h.ZEE_Forward_EleSelection(df, 70, 120)
-        df_prefvsmll = h.ZEE_EleSelection(df, 70, 10000)
+        df_prefvsmll = h.ZEE_EleSelection(df, 60, 10000)
         df = h.ZEE_EleSelection(df, 80, 100)
+
 
         # make copies of df for each bin of nvtx (+1 copy of the original)
         df_list = [df.Filter(nvtx_cut) for nvtx_cut in filter_list]
@@ -288,12 +354,17 @@ def main():
         
         
         df_prefvsmll, histos_pref = h.PrefiringVsMll(df_prefvsmll)
+        
+
         for i in all_histos:
             all_histos[i].GetValue().Write()
         for i in fwd_histos:
             fwd_histos[i].GetValue().Write()
         for i in histos_pref:
             histos_pref[i].GetValue().Write()
+        for i in histos_photon50:
+            histos_photon50[i].GetValue().Write()
+
 
     if args.channel == 'ZToMuMu':
         df_prefvsmll = h.ZMuMu_MuSelection(df, 70, 10000)
@@ -347,6 +418,23 @@ def main():
         
         for i in all_histos:
             all_histos[i].GetValue().Write()
+
+
+    if args.channel == 'TTbar1Mu4Jets2BJets':
+        df = h_hadw.TTbar1Mu2BJets4Jets(df)
+        df_report = df.Report()
+        df, histos = h_hadw.AnalyzeJetsTTbar1Mu4Jets2BJets(df)
+        for i in histos:
+            histos[i].GetValue().Write()
+        df_report.Print()
+
+    if args.channel == 'TTbar1Mu4Jets2BJets_L1Only':
+        df = h_hadw.TTbar1Mu2BJets4Jets_l1only(df)
+        df_report = df.Report()
+        df, histos = h_hadw.AnalyzeJetsTTbar1Mu4Jets2BJets_l1only(df)
+        for i in histos:
+            histos[i].GetValue().Write()
+        df_report.Print()
 
 
     nvtx_histo.GetValue().Write()

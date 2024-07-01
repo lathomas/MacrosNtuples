@@ -7,6 +7,9 @@ Qualities:
     AllQual: -1
     Qual8:  8
     Qual12: 12
+    Qual13: 13
+    Qual14: 14
+    Qual15: 15
 ### The different of regions of eta
 Regions:
     # <label>: [<low bound>, <high bound>]
